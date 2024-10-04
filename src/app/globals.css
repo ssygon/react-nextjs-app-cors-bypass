@@ -1,27 +1,105 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root {
+  --max-width-content: 600px;
+  --side-padding: 25px;
+  --primary-color: #007bff;
+  --a-color: var(--primary-color);
+  --p-color: #000;
+  --input-border-color: #e5e7eb;
+  --input-placeholder-color: #94a3b8;
+  --input-border-radius: 0.375rem;
+  --button-border-radius: 0.375rem;
+}
+
+input:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid blue;
+  outline-offset: 2px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr min(calc(100% - 2* var(--side-padding)), 100%) 1fr;
+  & > * {
+    grid-column: 2;
+    width: 100%;
+    max-width: var(--max-width-content);
+    margin-inline: auto;
+  }
+}
+
+section {
+  text-align: center;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-weight: 700;
+  padding: 1rem 0;
+}
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.5rem;
+}
+h3 {
+  font-size: 1.25rem;
+}
+h4 {
+  font-size: 1rem;
+}
+
+p {
+  font-size: 1rem;
+  margin-top: 0;
+  color: var(--p-color); 
+}
+
+.btn {
+  @apply w-full sm:w-auto bg-blue-500 hover:bg-blue-700 text-white font-bold border-blue-700 rounded py-2 px-4 mt-3 mb-3;
+}
+
+
+
+input {
+  --input-side-padding: 0.75rem;
+  width: calc(100%);
+  min-width: 260px;
+  background: transparent;
+  color: var(--p-color); 
+  font-size: 0.875rem;
+  border: 2px solid var(--input-border-color);
+  border-radius: var(--input-border-radius);
+  padding: 0.5rem var(--input-side-padding);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &::placeholder {
+    color: var(--input-placeholder-color);
+  }
+}
+
+.message {
+  color: green;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  &.error {
+    color: red;
   }
 }
